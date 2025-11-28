@@ -1,0 +1,10 @@
+[package]
+name = "easy-gpu"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+wgpu = "24.0"
+bytemuck = { version = "1.16", features = ["derive"] }
+glam = { version = "0.28", features = ["bytemuck"] }
+pollster = "0.3"
