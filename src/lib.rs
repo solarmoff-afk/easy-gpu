@@ -11,7 +11,7 @@ pub use context::Context;
 pub use buffer::Buffer;
 pub use texture::Texture;
 pub use pipeline::{Pipeline, PipelineBuilder};
-pub use matrix::MatrixStack;
+pub use matrix::{MatrixStack, MatrixUniform};
 pub use framebuffer::Framebuffer;
 pub use pass::RenderPass;
 pub use mask::Mask;
