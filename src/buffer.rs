@@ -57,4 +57,12 @@ impl<T: Pod> Buffer<T> {
     pub fn update_one(&self, ctx: &Context, data: &T) {
         ctx.queue.write_buffer(&self.raw, 0, bytemuck::cast_slice(&[*data]));
     }
+
+    pub fn vertex(ctx: &Context, data: &[T]) -> Self {
+        Self::create(ctx, data, wgpu::BufferUsages::VERTEX, "Vertex Buffer")
+    }
+
+    pub fn instance(ctx: &Context, data: &[T]) -> Self {
+        Self::create(ctx, data, wgpu::BufferUsages::VERTEX, "Instance Buffer")
+    }
 }
