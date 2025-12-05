@@ -29,7 +29,9 @@ impl<'a> RenderPass<'a> {
             occlusion_query_set: None,
         });
 
-        Self { raw }
+        Self {
+            raw
+        }
     }
 
     pub fn set_pipeline(&mut self, pipeline: &'a Pipeline) {
@@ -48,6 +50,10 @@ impl<'a> RenderPass<'a> {
         self.raw.set_index_buffer(buffer.raw.slice(..), wgpu::IndexFormat::Uint32);
     }
 
+    pub fn set_scissor(&mut self, x: u32, y: u32, w: u32, h: u32) {
+        self.raw.set_scissor_rect(x, y, w, h);
+    }
+
     pub fn draw(&mut self, vertex_count: u32) {
         self.raw.draw(0..vertex_count, 0..1);
     }
@@ -56,7 +62,11 @@ impl<'a> RenderPass<'a> {
         self.raw.draw_indexed(0..index_count, 0, 0..1);
     }
 
-    pub fn set_scissor(&mut self, x: u32, y: u32, w: u32, h: u32) {
-        self.raw.set_scissor_rect(x, y, w, h);
+    pub fn draw_instanced(&mut self, vertex_count: u32, instance_count: u32) {
+        self.raw.draw(0..vertex_count, 0..instance_count);
+    }
+
+    pub fn draw_indexed_instanced(&mut self, index_count: u32, instance_count: u32) {
+        self.raw.draw_indexed(0..index_count, 0, 0..instance_count);
     }
 }
