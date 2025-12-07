@@ -3,13 +3,13 @@ use wgpu::rwh::{HasDisplayHandle, HasWindowHandle};
 
 #[derive(Clone)]
 pub struct Context {
-    pub instance: Arc<wgpu::Instance>,
-    pub adapter: Arc<wgpu::Adapter>,
     pub device: Arc<wgpu::Device>,
     pub queue: Arc<wgpu::Queue>,
     pub surface: Option<Arc<wgpu::Surface<'static>>>,
     pub config: wgpu::SurfaceConfiguration,
     pub adapter_info: wgpu::AdapterInfo,
+    pub instance: Arc<wgpu::Instance>,
+    pub adapter: Arc<wgpu::Adapter>,
 }
 
 impl Context {
@@ -53,13 +53,13 @@ impl Context {
         let surface = unsafe { std::mem::transmute(surface) };
 
         let ctx = Self {
-            instance: Arc::new(instance),
-            adapter: Arc::new(adapter),
             device: Arc::new(device),
             queue: Arc::new(queue),
             surface: Some(Arc::new(surface)),
             config,
             adapter_info: adapter.get_info(),
+            instance: Arc::new(instance),
+            adapter: Arc::new(adapter),
         };
         
         ctx.configure_surface();
